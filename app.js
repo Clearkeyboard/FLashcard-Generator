@@ -56,20 +56,114 @@ var selectFlashCard = function() {
     inquirer.prompt([
         {
             type: 'list',
-            name: 'flashCard list',
+            name: 'pickflashcard',
             message: 'Select a FlashCard from below',
             choices: [
-                flashcards[0].printFront(),
-                flashcards[1].printFront(),
-                flashcards[2].printFront(),
-                flashcards[3].printFront(),
-                flashcards[4].printFront() 
+                '1',
+                '2',
+                '3',
+                '4',
+                '5',
+                'back'
             ]
         }
-    ])
-}
-//function that shows front or back of flashcard
+    ]).then(function(flash) {
+        switch (flash.pickflashcard){
+            case '1':
+            if (flashcards[0]) {
+                flashcards[0].printFront()
+                inquirer.prompt([
+                    {
+                        type: 'confirm',
+                        name: 'back',
+                        message: "Are you ready to view the Back?"
+                    }
+                ]).then(function(pick){
+                    if (pick.back){
+                        flashcards[0].printBack();
+                        selectFlashCard();
+                    }else{selectFlashCard();}
+                })
+            }else {console.log("There is not a flashcard in this slot")}
+            break;
 
+            case '2':
+            if (flashcards[1]) {
+                flashcards[1].printFront()
+                 inquirer.prompt([
+                    {
+                        type: 'confirm',
+                        name: 'back',
+                        message: "Are you ready to view the Back?"
+                    }
+                ]).then(function(pick){
+                    if (pick.back){
+                        flashcards[1].printBack();
+                        selectFlashCard();
+                    }else{selectFlashCard();}
+                })
+            }else {console.log("There is not a flashcard in this slot")}
+            break;
+
+            case '3':
+            if (flashcards[2]) {
+                flashcards[2].printFront()
+                 inquirer.prompt([
+                    {
+                        type: 'confirm',
+                        name: 'back',
+                        message: "Are you ready to view the Back?"
+                    }
+                ]).then(function(pick){
+                    if (pick.back){
+                        flashcards[2].printBack();
+                        selectFlashCard();
+                    }else{selectFlashCard();}
+                })
+            }else {console.log("There is not a flashcard in this slot")}
+            break;
+
+            case '4':
+            if (flashcards[3]) {
+                flashcards[3].printFront()
+                 inquirer.prompt([
+                    {
+                        type: 'confirm',
+                        name: 'back',
+                        message: "Are you ready to view the Back?"
+                    }
+                ]).then(function(pick){
+                    if (pick.back){
+                        flashcards[3].printBack();
+                        selectFlashCard();
+                    }else{selectFlashCard();}
+                })
+            }else {console.log("There is not a flashcard in this slot")}
+            break;
+
+            case '5':
+            if (flashcards[4]) {
+                flashcards[4].printFront()
+                 inquirer.prompt([
+                    {
+                        type: 'confirm',
+                        name: 'back',
+                        message: "Are you ready to view the Back?"
+                    }
+                ]).then(function(pick){
+                    if (pick.back){
+                        flashcards[4].printBack();
+                    }else{selectFlashCard();}
+                })
+            }else {console.log("There is not a flashcard in this slot")}
+            break;  
+
+            case 'back':
+            selections();
+            break;          
+        }
+    });
+}
 //function used to create flashcard
 var createFlashCard = function() {
     if (flashCount < 5) {
